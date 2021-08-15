@@ -1,32 +1,45 @@
 ---
 title: "Language Integrated Query: An introduction"
+author: Damien Guard
 paginate: true
 marp: true
 style: |
-    section.two-columns {
-        overflow: visible;
-        display: grid;
-        grid-template-columns: 50% 50%;
-        grid-template-rows: 100px auto;
-        grid-template-areas: 
-            "slideheading slideheading"
-            "leftpanel rightpanel";
-    }
+  pre code {
+    font-size: 0.82em;
+  }
+  section.two-columns {
+      overflow: visible;
+      display: grid;
+      grid-template-columns: 50% 50%;
+      grid-template-rows: 2em 1.5em auto;
+      grid-template-areas: 
+          "slideheading slideheading"
+          "comment comment"
+          "leftpanel rightpanel";
+  }
 
-    section.two-columns h3 {
-        grid-area: slideheading;
-    }
+  section.two-columns h1 {
+      grid-area: slideheading;
+  }
 
-    section.two-columns .left { grid-area: leftpanel; margin-right: 0.5em }
-    section.two-columns .right { grid-area: rightpanel; margin-left: 0.5em }
-theme: default
+  section.two-columns p {
+      grid-area: comment;
+      font-style: italic;
+  } 
+
+  section.two-columns .left { grid-area: leftpanel; margin-right: 0.5em }
+  section.two-columns .right { grid-area: rightpanel; margin-left: 0.5em }
+theme:
 ---
+
 # Language Integrated Query: An introduction
 
 ### Damien Guard (BSc, MBCS)
+
 https://damieng.com
 
 ### Guernsey Software Developers Forum
+
 29 January 2008
 
 ---
@@ -43,18 +56,18 @@ https://damieng.com
 # Query without LINQ
 
 - Objects using loops and conditions
-   ```csharp
+  ```csharp
   foreach(Customer c in customers)
-     if (c.Region == "UK") ...
-   ```
+    if (c.Region == "UK") ...
+  ```
 - Databases using SQL
-   ```sql
-   SELECT * FROM Customers WHERE Region='UK'
-    ```
+  ```sql
+  SELECT * FROM Customers WHERE Region='UK'
+  ```
 - XML using XPath/XQuery
-   ```xpath
-   //Customers/Customer[@Region='UK']
-   ```
+  ```xpath
+  //Customers/Customer[@Region='UK']
+  ```
 
 ---
 
@@ -62,11 +75,11 @@ https://damieng.com
 
 ```csharp
 SqlConnection con = new SqlConnection(...);
-con.Open(); 
+con.Open();
 SqlCommand cmd = new SqlCommand(
   @"SELECT * FROM Customers WHERE c.Region = @Region", con);
-cmd.Parameters.AddWithValue("@Region", "UK"); 
-DataReader dr = cmd.ExecuteReader(); 
+cmd.Parameters.AddWithValue("@Region", "UK");
+DataReader dr = cmd.ExecuteReader();
 while (dr.Read()) {
    string name = dr.GetString(dr.GetOrdinal("Name"));
    string phone = dr.GetString(dr.GetOrdinal("Phone"));
@@ -91,6 +104,7 @@ var myCustomers = from c in customers
     where c.Region == "UK"
     select c;
 ```
+
 </div>
 <div class=right>
 
@@ -101,6 +115,7 @@ Dim myCustomers = From c In customers _
     Where c.Region = "UK" _
     Select c
 ```
+
 </div>
 
 ---
@@ -138,7 +153,7 @@ Dim goodCusts = (From c In db.Customers _
 
 # Advantages
 
-- **Unified data access** -  Single syntax to learn and remember
+- **Unified data access** - Single syntax to learn and remember
 - **Strongly typed** - Catch errors during compilation
 - **IntelliSense** - Prompt for syntax and attributes
 - **Bindable result sets** - In some providers
@@ -182,7 +197,7 @@ Dim above = From n In nums _
   Includes arrays, List<T>, Dictionary...
 - Many useful operators available
   Sum, Max, Min, Distinct, Intersect, Union
-- Expose your own data with 
+- Expose your own data with
   IEnumerable<T> or IQueryable<T>
 - Create operators using extension methods
 
@@ -278,6 +293,7 @@ Dim above = From n In nums _
 ---
 
 # Demo of LINQ to SQL
+
 <!-- _class: invert -->
 
 ---
@@ -354,4 +370,5 @@ Dim above = From n In nums _
 ---
 
 # Questions & answers
+
 <!-- _class: invert -->

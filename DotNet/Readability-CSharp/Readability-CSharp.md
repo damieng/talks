@@ -1,5 +1,6 @@
 ---
 title: "Improving the readability of C#"
+author: Damien Guard
 paginate: true
 marp: true
 style: |
